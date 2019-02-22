@@ -99,7 +99,7 @@
 <div id="login" class="container " style="height: 100%">
     <div style="margin-top:12em">
         <div class="from">
-            <h2 class="text-center" style="color:#0000CD">用户登陆</h2>
+            <h2 class="text-center" style="color: whitesmoke">用户登陆</h2>
             <label for="username" class="sr-only">账号</label>
             <input type="text" id="username" class="form-control input" placeholder="请输入账号" required autofocus  v-model="user.username">
             <label for="password" class="sr-only">密码</label>

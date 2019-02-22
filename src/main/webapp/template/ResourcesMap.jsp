@@ -188,7 +188,7 @@
             type: 'post',
             url: 'map/GetMap.in',
             dataType: 'json',
-            async: false,
+            async: true,
             data: {
                 name: name
             },
