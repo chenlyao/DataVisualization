@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--与接口的位置对应-->
+<mapper namespace="com.sun.mapper.User.UserMapper">
+    <select id="IsLogin" parameterType="map" resultType="hashmap">
+        SELECT A.uid,A.username,A.name FROM "user" A
+        WHERE A.username=#{username}
+        AND A.password=#{password}
+    </select>
+    <insert id="Register" parameterType="map">
+      <if test="username!=null and username!=''&amp;&amp;password!=null and password!=''&amp;&amp;name!=null and name!=''&amp;&amp;email!=null and email!=''&amp;&amp;sex!=null and sex!=''">
+        INSERT INTO "user"(username, password, name, email,sex) VALUES
+            (#{username},#{password},#{name},#{email},#{sex})
+      </if>
+    </insert>
+
+</mapper>

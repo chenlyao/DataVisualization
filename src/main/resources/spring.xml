@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <!-- 加载配置文件 -->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <!-- 数据库连接池 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="${initialSize}"/><!--初始化连接-->
+        <property name="maxActive" value="${maxActive}"/><!--最大活动连接-->
+        <property name="maxIdle" value="${maxIdle}"/><!--最大空闲连接-->
+        <property name="minIdle" value="${minIdle}"/><!--最小空闲连接-->
+        <property name="maxWait" value="${maxWait}"/><!--从连接池取连接的最大等待时间，单位ms-->
+        <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/><!--每60秒运行一次空闲连接回收器-->
+        <property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}"/><!--池中的连接空闲30分钟后被回收-->
+        <property name="validationQuery" value="${validationQuery}"/><!--验证使用的SQL语句-->
+        <property name="testWhileIdle" value="${testWhileIdle}"/><!--指明连接是否被空闲连接回收器(如果有)进行检验，如果检验失败，则连接将被从池中去除-->
+        <property name="testOnBorrow" value="${testOnBorrow}"/><!--借出连接时不要测试，否则很影响性能-->
+        <property name="testOnReturn" value="${testOnReturn}"/>
+        <property name="poolPreparedStatements" value="${poolPreparedStatements}"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="${maxPoolPreparedStatementPerConnectionSize}"/>
+        <property name="removeAbandoned" value="${removeAbandoned}"/><!--连接泄漏回收参数，当可用连接数少于3个小时才执行-->
+        <property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}"/><!--连接泄漏回收参数，180秒，泄漏的连接可以被删除的超时值-->
+    </bean>
+    <!-- 让spring管理sqlsessionfactory 使用mybatis和spring整合包中的 -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <!--mybatis扫描-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.sun.mapper"/>
+    </bean>
+
+    <bean class="com.google.gson.Gson"/>
+
+</beans>

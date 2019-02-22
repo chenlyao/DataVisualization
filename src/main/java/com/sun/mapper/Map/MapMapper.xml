@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--与接口的位置对应-->
+<mapper namespace="com.sun.mapper.Map.MapMapper">
+
+    <select id="GetBorder" parameterType="map" resultType="hashmap">
+        SELECT A.* FROM "GeoJson" A
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="name!=null and name!=''">
+                AND A.name=#{name}
+            </if>
+        </trim>
+    </select>
+    <select id="GetLqByUid" parameterType="map" resultType="hashmap">
+        SELECT A.lqdm,A.border,A.crop FROM "tb_lq" A
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="uid!=null and uid!=''">
+                A.uid=#{uid}::uuid
+            </if>
+        </trim>
+    </select>
+    <select id="GetLqUid" parameterType="map" resultType="hashmap">
+        SELECT A.uid
+        FROM tb_lq A
+    </select>
+    <select id="GetVillageUid" parameterType="map" resultType="hashmap">
+        SELECT A.uid
+        FROM tb_village A
+    </select>
+    <select id="GetVillageByUid" parameterType="map" resultType="hashmap">
+        SELECT A.name,A.border FROM tb_village A
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="uid!=null and uid!=''">
+                A.uid=#{uid}::uuid
+            </if>
+        </trim>
+    </select>
+    <select id="GetTownUid" parameterType="map" resultType="hashmap">
+        SELECT A.uid
+        FROM tb_towns A
+    </select>
+    <select id="GetTownByUid" parameterType="map" resultType="hashmap">
+        SELECT A.name,A.border FROM tb_towns A
+        <trim prefix="WHERE" prefixOverrides="AND|OR">
+            <if test="uid!=null and uid!=''">
+                A.uid=#{uid}::uuid
+            </if>
+        </trim>
+    </select>
+    <select id="likeList" parameterType="map" resultType="hashmap">
+        SELECT A.uid, A.name,A.type,A.ph,A.organic,A.n,A.p,A.k,A.cjqydm FROM tb_village A
+        <trim prefix="WHERE" suffixOverrides="AND | OR">
+            <if test="name!=null">
+                A.name LIKE CONCAT('%',#{name},'%') AND
+            </if>
+        </trim>
+        OFFSET #{page}::bigint
+        LIMIT #{limit}::bigint
+    </select>
+    <delete id="village_delete" parameterType="map">
+        <if test="uid!=null and uid!=''">
+            DELETE FROM tb_village WHERE uid=#{uid}
+        </if>
+    </delete>
+    <update id="village_update" parameterType="map">
+        <if test="uid!=null and uid!=''">
+            UPDATE tb_village
+            <set>
+                <if test="cjqydm!=null and cjqydm!=''">
+                   cjqydm=#{cjqydm},
+                </if>
+                <if test="name!=null and name!=''">
+                   name=#{name},
+                </if>
+                <if test="ph!=null and ph!=''">
+                    ph=#{ph}::numeric,
+                </if>
+                <if test="organic!=null and organic!=''">
+                   organic=#{organic}::numeric,
+                </if>
+                <if test="n!=null and n!=''">
+                   n=#{n}::numeric,
+                </if>
+                <if test="p!=null and n!=''">
+                   p=#{p}::numeric,
+                </if>
+                <if test="k!=null and k!=''">
+                   k=#{k}::numeric
+                </if>
+            </set>
+            WHERE uid=#{uid}::uuid
+        </if>
+    </update>
+    <insert id="village_insert" parameterType="map">
+        <if test="name!=null&amp;&amp;cjqydm!=null&amp;&amp;ph!=null&amp;&amp;organic!=null&amp;&amp;n!=null&amp;&amp;p!=null&amp;&amp;k!=null">
+            INSERT INTO tb_village(name,cjqydm,ph,organic,n,p,k)
+            VALUES (#{name},#{cjqydm},#{ph},#{organic},#{n},#{p},#{k})
+        </if>
+    </insert>
+
+</mapper>
