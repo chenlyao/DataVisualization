@@ -1,7 +1,10 @@
 package com.sun.controller.request;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Map;
 
 @Controller
 public class PageController {
@@ -77,10 +80,22 @@ public class PageController {
 
     /**
      * 数据管理
+     *
      * @return
      */
     @RequestMapping("/DataManagement.net")
-    public String DataManagement(){
+    public String DataManagement() {
         return "page/DataManagement";
+    }
+
+    /**
+     * 后台管理界面
+     *
+     * @return
+     */
+    @RequestMapping("/BackGround.net")
+    public String BackGround(String username, Model model) {
+        model.addAttribute("username",username);
+        return "background/BG_main";
     }
 }

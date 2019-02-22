@@ -57,6 +57,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">设置<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li ><a id="bg" href="">后台管理</a></li>
                             <li><a href="#">用户设置</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="Exit.in">退出</a></li>
@@ -83,6 +84,7 @@
             alert("请先登录！");
             window.location.href = "Exit.in";
         }
+        $('#bg').attr("href","BackGround.net?username="+data.data.username);
     });
 
     data = eval('(' + data + ')');
