@@ -104,7 +104,8 @@ public class PageController {
      * @return
      */
     @RequestMapping("/UserManagement.net")
-    public String UserManagement(){
+    public String UserManagement(String uid,Model model){
+        model.addAttribute("uid",uid);
         return "UserManagement";
     }
 }

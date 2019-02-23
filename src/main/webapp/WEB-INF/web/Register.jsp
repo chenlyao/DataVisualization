@@ -67,10 +67,10 @@
             <label class="col-sm-5 control-label">性别:</label>
             <div class="col-sm-7">
                 <label class="radio-inline">
-                    <input type="radio" name="sex" id="male" value="male" v-model="sex" checked> 男
+                    <input type="radio" name="sex" id="male" value="男" v-model="sex" checked> 男
                 </label>
                 <label class="radio-inline">
-                    <input type="radio" name="sex" id="female" value="female" v-model="sex"> 女
+                    <input type="radio" name="sex" id="female" value="女" v-model="sex"> 女
                 </label>
             </div>
         </div>
@@ -84,6 +84,11 @@
 </div>
 <script src="lib/bootstrap-3.3.7-dist/bootstrapValidator/js/bootstrapValidator.js"></script>
 <script>
+    layui.use(['form', 'layer', 'laydate'], function () {
+    var form = layui.form;
+    var layer = layui.layer;
+    var laydate = layui.laydate;
+
     var register = new Vue({
         el: '#form',
         data: {
@@ -109,10 +114,10 @@
                         },
                         success: function (data) {
                             if (data.type == "success") {
-                                alert("注册成功！");
+                               layer.msg("注册成功！");
                                 window.location.href = "${pageContext.request.contextPath}/";
                             } else {
-                                alert("注册失败！");
+                                layer.msg("注册失败！");
                             }
                         }
                     })
@@ -195,6 +200,7 @@
             }
         });
     });
+});
 </script>
 </body>
 </html>

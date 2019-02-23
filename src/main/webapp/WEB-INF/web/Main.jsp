@@ -57,8 +57,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">设置<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li ><a id="bg" href="">后台管理</a></li>
-                            <li><a href="#">用户设置</a></li>
+                            <li><a id="bg" href="">后台管理</a></li>
+                            <li><a id="user" href="" onclick="GotoUserManagement()">用户设置</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="Exit.in">退出</a></li>
                         </ul>
@@ -67,7 +67,8 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-    <div class="container-fluid" style=" flex-grow: 1;position: fixed; top: 5%;height: 91%;width: 100%;padding: 0;margin: 0">
+    <div class="container-fluid"
+         style=" flex-grow: 1;position: fixed; top: 5%;height: 91%;width: 100%;padding: 0;margin: 0">
         <iframe id="iframe" src="BasicMap.net" name="content" frameborder="0" width="100%" height="100%"></iframe>
     </div>
     <%--底部--%>
@@ -84,8 +85,12 @@
             alert("请先登录！");
             window.location.href = "Exit.in";
         }
-        $('#bg').attr("href","BackGround.net?username="+data.data.username);
+        $('#bg').attr("href", "BackGround.net?username=" + data.data.username);
     });
+
+    function GotoUserManagement() {
+        $('#user').attr("href", "UserManagement.net?uid=" + data.data.uid);
+    }
 
     data = eval('(' + data + ')');
     var control = new Vue({

@@ -3,15 +3,61 @@
 <!--与接口的位置对应-->
 <mapper namespace="com.sun.mapper.User.UserMapper">
     <select id="IsLogin" parameterType="map" resultType="hashmap">
-        SELECT A.* FROM "user" A
-        WHERE A.username=#{username}
-        AND A.password=#{password}
+        SELECT A.*
+        FROM "user" A
+        WHERE A.username = #{username}
+          AND A.password = #{password}
     </select>
     <insert id="Register" parameterType="map">
-      <if test="username!=null and username!=''&amp;&amp;password!=null and password!=''&amp;&amp;name!=null and name!=''&amp;&amp;email!=null and email!=''&amp;&amp;sex!=null and sex!=''">
-        INSERT INTO "user"(username, password, name, email,sex) VALUES
+        <if test="username!=null and username!=''&amp;&amp;password!=null and password!=''&amp;&amp;name!=null and name!=''&amp;&amp;email!=null and email!=''&amp;&amp;sex!=null and sex!=''">
+            INSERT INTO "user"(username, password, name, email,sex) VALUES
             (#{username},#{password},#{name},#{email},#{sex})
-      </if>
+        </if>
     </insert>
 
+    <select id="SelectByUid" parameterType="map" resultType="hashmap">
+        <if test="uid!=null and uid!=''">
+            SELECT A.* FROM "user" A
+            WHERE
+            A.uid=#{uid}::uuid
+        </if>
+    </select>
+
+    <update id="UpDataByUid" parameterType="map">
+        <if test="uid!=null and uid!=''">
+            UPDATE "user"
+            <trim prefix="set" suffixOverrides="," suffix="where uid=#{uid}::uuid">
+                <if test="username!=null and username!=''">
+                    username=#{username},
+                </if>
+                <if test="password!=null and password!=''">
+                    password=#{password},
+                </if>
+                <if test="name!=null and name!=''">
+                    name=#{name},
+                </if>
+                <if test="email!=null and email!=''">
+                    email=#{email},
+                </if>
+                <if test="telephone!=null and telephone!=''">
+                    telephone=#{telephone},
+                </if>
+                <if test="sex!=null and sex!=''">
+                    sex=#{sex},
+                </if>
+              <if test="state!=null and state!=''">
+                  state=#{state}::boolean,
+              </if>
+              <if test="birthday!=null and birthday!=''">
+                  birthday=#{birthday},
+              </if>
+              <if test="role!=null and role!=''">
+                  role=#{role}::uuid,
+              </if>
+              <if test="remark!=null and remark!=''">
+                  remark=#{remark}::text
+              </if>
+            </trim>
+        </if>
+    </update>
 </mapper>
