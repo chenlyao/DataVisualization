@@ -21,7 +21,7 @@
         }
 
         .bg {
-            background: url('resources/images/one.jpg') center;
+            background: url('${pageContext.request.contextPath}/resources/images/one.jpg') center;
             background-size: 100% 100%;
         }
 

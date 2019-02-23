@@ -3,7 +3,7 @@
 <!--与接口的位置对应-->
 <mapper namespace="com.sun.mapper.User.UserMapper">
     <select id="IsLogin" parameterType="map" resultType="hashmap">
-        SELECT A.uid,A.username,A.name FROM "user" A
+        SELECT A.* FROM "user" A
         WHERE A.username=#{username}
         AND A.password=#{password}
     </select>

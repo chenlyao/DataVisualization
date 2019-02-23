@@ -96,14 +96,15 @@
         "智图灰色": normalm4,
         "智图暖色": normalm5,
         "智图冷色": normalm6,
-        "天地图": normal,
-        "天地图影像": image,
+        // "天地图": normal,
+        // "天地图影像": image,
         "谷歌地图": normalMap,
         "谷歌影像": satelliteMap,
         "高德地图": Gaode,
         "高德影像": Gaodimage
     };
     var map = L.map("map", {
+        renderer: L.canvas(),
         center: [37.65066, 117.14035],
         zoom: 11,
         layers: [satelliteMap],

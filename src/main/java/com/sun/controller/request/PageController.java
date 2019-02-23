@@ -98,4 +98,13 @@ public class PageController {
         model.addAttribute("username",username);
         return "background/BG_main";
     }
+
+    /**
+     * 用户管理界面
+     * @return
+     */
+    @RequestMapping("/UserManagement.net")
+    public String UserManagement(){
+        return "UserManagement";
+    }
 }

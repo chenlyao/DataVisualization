@@ -85,7 +85,7 @@
 <script src="lib/bootstrap-3.3.7-dist/bootstrapValidator/js/bootstrapValidator.js"></script>
 <script>
     var register = new Vue({
-        el: 'form',
+        el: '#form',
         data: {
             username: null,
             password: null,
