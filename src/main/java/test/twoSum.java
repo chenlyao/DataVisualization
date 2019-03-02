@@ -51,6 +51,36 @@ public class twoSum {
      * 注意，该目标元素不能是nums[i]本身!
      * 时间复杂度：O(n)，我们把包含有n个元素的列表遍历两次，由于哈希表将查找时间缩短O(1)，所以时间复杂度为O(n)。(一遍for循环)
      * 空间复杂度:O(n),所需的额外空间取决与哈希表中存储的元素数量，该表中存储了n个元素。(内存占用了两倍)
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+//    public int[] twoSum(int[] nums, int target) {
+//        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+//        for (int i = 0; i < nums.length; i++) {
+//            map.put(nums[i], i);
+//        }
+//        for (int i = 0; i < nums.length; i++) {
+//            int complement = target - nums[i];
+//            if (map.containsKey(complement) && map.get(complement) != i) {
+//                int a[] = new int[2];
+//                a[0] = i;
+//                a[1] = map.get(complement);
+//                for (int k = 0; k < a.length; k++) {
+//                    System.out.println(a[k]);
+//                }
+//                return a;
+//            }
+//        }
+//        throw new IllegalArgumentException("No two sum solution");
+//    }
+
+    /**
+     * 一遍哈希表
+     * 在进行迭代并将元素插入到表中的同时，我们还会回头来检查表中是否已经村在当前元素所对应的目标元素。
+     * 如果它存在，那我们已经找到了对应的解，并立即将其返回。
+     * 时间复杂度和空间复杂度与两边哈希表一样，只是用一个for循环解决。
      * @param nums
      * @param target
      * @return
@@ -58,20 +88,18 @@ public class twoSum {
     public int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                int result[] = new int[2];
+                result[0] = map.get(complement);
+                result[1] = i;
+                for (int k = 0; k < result.length; k++) {
+                    System.out.println(result[k]);
+                }
+                return result;
+            }
             map.put(nums[i], i);
         }
-        for (int i = 0; i < nums.length; i++) {
-            int complement = target - nums[i];
-            if (map.containsKey(complement) && map.get(complement) != i) {
-                int a[] = new int[2];
-                a[0] = i;
-                a[1] = map.get(complement);
-                for (int k = 0; k < a.length; k++) {
-                    System.out.println(a[k]);
-                }
-                return a;
-            }
-        }
-        throw new IllegalArgumentException("No two sum solution");
+        throw new IllegalArgumentException("没有结果");
     }
 }
