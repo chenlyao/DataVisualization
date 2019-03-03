@@ -12,8 +12,8 @@ var laoling_K=map_server_url+"laoling/K/MapServer";
 
 
 //采样点地址url
-var url_querypoint=map_server_url+"laoling/points/MapServer/0";
-
+// var url_querypoint=map_server_url+"laoling/points/MapServer/0";
+var url_querypoint=map_server_url+"laoling/laoling_villages/MapServer/0";
 //四层方法url
 var Interpolation_four=map_server_url+"laoling_server/four/GPServer/Interpolation_four";
 var Interpolation_four_mapserver=map_server_url+"laoling_server/four/MapServer";

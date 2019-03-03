@@ -286,7 +286,7 @@
             //将返回的几何点数据传输给featureSet
             //将数据的格式转换为json
             var featureSet = JSON.stringify(fs);
-            console.log(featureSet);
+           // console.log(featureSet);
             //创建GP服务的参数
             var params = {
                 IDWinput: featureSet, //Points是GP的输入参数名称，要和GP服务一直

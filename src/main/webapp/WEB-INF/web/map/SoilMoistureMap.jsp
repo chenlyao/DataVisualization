@@ -80,12 +80,12 @@
         maps.length = 0;
     }
 
-    function getmap(url) {
+    function getmap(url,x) {
         ClearMaps();
         maps.push(new L.esri.dynamicMapLayer({
             url: url,
             opacity: 0.75,
-            layers: [1]
+            layers: [x]
         }).addTo(map));
     }
 
@@ -115,12 +115,12 @@
             K: {
                 url: laoling_K,
                 name: '钾插值分布',
-                coverage: 1
+                coverage: 0
             }
         },
         methods: {
             clickButton: function (data) {
-                getmap(data.url);
+                getmap(data.url,data.coverage);
                 GetLegend(data.url, data.name, data.coverage);
             },
             clear: function () {

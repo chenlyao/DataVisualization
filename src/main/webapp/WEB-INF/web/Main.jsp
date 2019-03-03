@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li :class="{'active':首页.active}" @click="clickButton(首页)"><a href="#">首页</a></li>
-                    <li :class="{'active':土壤墒情.active}" @click="clickButton(土壤墒情)"><a href="#">土壤墒情</a></li>
+                    <li :class="{'active':土壤养分.active}" @click="clickButton(土壤养分)"><a href="#">土壤养分</a></li>
                     <li :class="{'active':测土配方.active}" @click="clickButton(测土配方)"><a href="#">测土配方</a></li>
                     <li :class="{'active':遥感监测.active}" @click="clickButton(遥感监测)"><a href="#">遥感监测</a></li>
                     <li :class="{'active':数据管理.active}" @click="clickButton(数据管理)"><a href="#">数据管理</a></li>
@@ -101,7 +101,7 @@
                 active: true,
                 url: "BasicMap.net"
             },
-            土壤墒情: {
+            土壤养分: {
                 active: false,
                 url: 'SoilMoistureMap.net'
             },
@@ -122,7 +122,7 @@
             clickButton: function (button) {
                 //    切换激活按钮
                 this.首页.active = false;
-                this.土壤墒情.active = false;
+                this.土壤养分.active = false;
                 this.测土配方.active = false;
                 this.遥感监测.active = false;
                 this.数据管理.active = false;
