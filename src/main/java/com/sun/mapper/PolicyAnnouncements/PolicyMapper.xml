@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--与接口的位置对应-->
+<mapper namespace="com.sun.mapper.PolicyAnnouncements.PolicyMapper">
+    <!--如果报错控制台日志不提醒，记得去看localhost log 如果是应为这里报错是应为字段类型的问题-->
+    <resultMap id="policy" type="com.sun.pojo.PolicyModel">
+        <id column="uid" property="uid" jdbcType="VARCHAR"/><!-- column对应数据库字段，property对应实体类字段(uuid使用varchar)-->
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="form" property="form" jdbcType="VARCHAR"/>
+        <result column="datetime" property="datetime" jdbcType="DATE"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+    </resultMap>
+    <!--id(与接口的方法名对应)
+    parameterType(输入参数的类型)
+    resultType(返回值得类型)
+    resultMap(返回值得类型(用于处理数据库表与pojo的值不对应的情况))-->
+    <select id="select_all" resultMap="policy">
+        SELECT A.* FROM tb_policy_announcements A
+    </select>
+</mapper>

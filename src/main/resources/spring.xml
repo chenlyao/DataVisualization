@@ -17,7 +17,7 @@
         <property name="password" value="${jdbc.password}"/>
         <property name="initialSize" value="${initialSize}"/><!--初始化连接-->
         <property name="maxActive" value="${maxActive}"/><!--最大活动连接-->
-        <property name="maxIdle" value="${maxIdle}"/><!--最大空闲连接-->
+        <!--<property name="maxIdle" value="${maxIdle}"/>&lt;!&ndash;最大空闲连接&ndash;&gt;-->
         <property name="minIdle" value="${minIdle}"/><!--最小空闲连接-->
         <property name="maxWait" value="${maxWait}"/><!--从连接池取连接的最大等待时间，单位ms-->
         <property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}"/><!--每60秒运行一次空闲连接回收器-->
