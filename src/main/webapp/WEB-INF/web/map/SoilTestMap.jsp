@@ -50,6 +50,7 @@
 <div>
     <div id="map"></div>
     <%@include file="/template/ResourcesMap.jsp" %>
+    <%@include file="/template/CommonMap.jsp"%>
     <div class="btn-group text-center" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalTwo">测土配方卡</button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalOne">元素地图计算</button>

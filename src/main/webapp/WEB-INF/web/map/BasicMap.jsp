@@ -30,6 +30,7 @@
 <div id="mapMain">
     <div id="map" style="width: 100%;height: 100%;z-index: 1"></div>
     <%@include file="/template/ResourcesMap.jsp" %>
+    <%@include file="/template/CommonMap.jsp"%>
     <div class="btn-group text-center" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
         <button  type="button" class="btn btn-default" onclick="GetTownUid()">乡镇</button>
         <button  type="button" class="btn btn-default" onclick="GetVillageUid()">村界</button>

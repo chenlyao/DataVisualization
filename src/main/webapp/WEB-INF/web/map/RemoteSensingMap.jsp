@@ -51,6 +51,7 @@
 <div>
     <div id="map"></div>
     <%@include file="/template/ResourcesMap.jsp" %>
+    <%@include file="/template/CommonMap.jsp"%>
     <div id="main" class="btn-group" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
         <div class="btn-group" role="group">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
