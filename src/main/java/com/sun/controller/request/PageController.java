@@ -83,9 +83,9 @@ public class PageController {
      *
      * @return
      */
-    @RequestMapping("/DataManagement.net")
+    @RequestMapping("/VillageDataManagement.net")
     public String DataManagement() {
-        return "page/DataManagement";
+        return "page/VillageDataManagement";
     }
 
     /**

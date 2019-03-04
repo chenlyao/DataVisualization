@@ -50,32 +50,28 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item">
-                    <a href="javascript:;">解决方案</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="">超链接</a></dd>
-                    </dl>
-                </li>
-                <li class="layui-nav-item"><a href="#">云市场</a></li>
-                <li class="layui-nav-item"><a href="#">发布商品</a></li>
+            <li class="layui-nav-item" v-for="(ms,i) in menus">
+                <a href="javascript:void(0)">{{ms.name}}</a>
+                <dl class="layui-nav-child">
+                    <dd v-for="(m,j) in ms.menu"  @click="clickMenu(m,i,j)"><a href="javascript:void(0)">{{m.name}}</a></dd>
+                </dl>
+            </li>
+                <li class="layui-nav-item"><a href="#">用户管理</a></li>
+                <li class="layui-nav-item"><a href="#">遥感数据管理</a></li>
             </ul>
         </div>
     </div>
 
-    <div class="layui-body">
+    <div id="layui-body" class="layui-body" style="bottom: 0;">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+        <div id="layui-tab" class="layui-tab layui-tab-card" lay-filter="mainTab" lay-allowClose="true" style="margin: 0;">
+            <ul class="layui-tab-title" style="margin-bottom: 5px">
+
+            </ul>
+            <div id="layui-tab-content" class="layui-tab-content" style="padding: 0px">
+
+            </div>
+        </div>
     </div>
 
     <div class="layui-footer">
@@ -85,20 +81,59 @@
 </div>
 <script>
     var username='${username}';
+    function size() {
+        $('#layui-tab').css('height',$('#layui-body').height()+'px');
+        $('#layui-tab-content').css('height',$('#layui-tab').height()-45+'px');
+    }
+    $(function () {
+        size();
+    });
+    window.onresize=function () {
+        size();
+    };
     var controller = new Vue({
         el: '#main',
         data: {
-            username:username
+            username:username,
+            menus:[
+                {
+                    name:'乡镇数据管理',
+                    menu:[
+                        {
+                            name:'村级数据管理',
+                            url:'VillageDataManagement.net'
+                        },
+                        {
+                            name:'村级数据管理',
+                            url:'VillageDataManagement.net'
+                        }
+                    ]
+                }
+            ]
         },
-        methods: {},
+        methods: {
+            clickMenu:function (obj,i,j) {
+                var id='p'+i+j;
+                //判断指定页面是否已经存在
+                if($('li[lay-id='+id+']').length==0){
+                    element.tabAdd('mainTab', {
+                        title: obj.name,
+                        content: '<iframe src="' + obj.url + '" frameborder="0" width="100%" height="100%"></iframe>',
+                        id: id
+                    });
+                    element.tabChange('mainTab',id);
+                }
+            }
+        },
         created: function () {
 
         }
     });
 
     //JavaScript代码区域
+    var element;
     layui.use('element', function () {
-        var element = layui.element;
+        element = layui.element;
 
     });
 </script>

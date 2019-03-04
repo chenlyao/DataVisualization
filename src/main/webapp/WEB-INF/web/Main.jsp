@@ -43,7 +43,6 @@
                     <li :class="{'active':土壤养分.active}" @click="clickButton(土壤养分)"><a href="#">土壤养分</a></li>
                     <li :class="{'active':测土配方.active}" @click="clickButton(测土配方)"><a href="#">测土配方</a></li>
                     <li :class="{'active':遥感监测.active}" @click="clickButton(遥感监测)"><a href="#">遥感监测</a></li>
-                    <li :class="{'active':数据管理.active}" @click="clickButton(数据管理)"><a href="#">数据管理</a></li>
                 </ul>
                 <%--<form class="navbar-form navbar-left">--%>
                 <%--<div class="form-group">--%>
@@ -112,10 +111,6 @@
             遥感监测: {
                 active: false,
                 url: 'RemoteSensingMap.net'
-            },
-            数据管理: {
-                active: false,
-                url: 'DataManagement.net'
             }
         },
         methods: {
@@ -125,7 +120,6 @@
                 this.土壤养分.active = false;
                 this.测土配方.active = false;
                 this.遥感监测.active = false;
-                this.数据管理.active = false;
                 button.active = true;
                 window.content.location.href = button.url;
             }
