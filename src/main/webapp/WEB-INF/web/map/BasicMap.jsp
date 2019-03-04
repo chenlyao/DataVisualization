@@ -22,22 +22,108 @@
             justify-content: flex-start;
             flex-direction: column;
             overflow-y: hidden;
+        }
 
+        #panel {
+            width: 40%;
+            height: 100%;
         }
     </style>
 </head>
 <body>
-<div id="mapMain">
+
+<div id="panel" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            政策公告
+        </h3>
+    </div>
+    <div class="panel-body" style="flex-grow: 1;overflow-y: auto">
+        <ul class="layui-timeline">
+            <li class="layui-timeline-item" v-for="li in list" @click="click(li)" style="cursor:pointer;">
+                <i class="layui-icon layui-timeline-axis"></i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title">{{li.datetime}}</h3>
+                    <p>{{li.title}}</p>
+                    <ul>
+                        <li>{{li.form}}</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel" style="text-align: center">
+                        {{d.title}}
+                        <h6 class="text-center">{{d.form}} <small>{{d.datetime}}</small></h6>
+                    </h4>
+                </div>
+                <div class="modal-body" style="text-indent: 2em;height: 400px;overflow-y: auto;">
+                    <p>{{d.content}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    </div>
+</div>
+<div id="mapMain" style="flex-grow: 1;position: fixed;right:0;float: right;width: 60%;height: 100%">
     <div id="map" style="width: 100%;height: 100%;z-index: 1"></div>
     <%@include file="/template/ResourcesMap.jsp" %>
-    <%@include file="/template/CommonMap.jsp"%>
+    <%@include file="/template/CommonMap.jsp" %>
     <div class="btn-group text-center" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
-        <button  type="button" class="btn btn-default" onclick="GetTownUid()">乡镇</button>
-        <button  type="button" class="btn btn-default" onclick="GetVillageUid()">村界</button>
-        <button  type="button" class="btn btn-default" onclick="ClearMaps()">清空</button>
+        <button type="button" class="btn btn-default" onclick="GetTownUid()">乡镇</button>
+        <button type="button" class="btn btn-default" onclick="GetVillageUid()">村界</button>
+        <button type="button" class="btn btn-default" onclick="ClearMaps()">清空</button>
     </div>
 </div>
 <script>
+    layui.use(['layer','form'],function () {
+       var layer=layui.layer;
+       var form=layui.form;
+        var control = new Vue({
+            el: '#panel',
+            data: {
+                list: [],
+                d: {}
+            },
+            methods: {
+                click:function (li) {
+                    this.d=li;
+                    $('#myModal').modal();
+                },
+                get_policy:function () {
+                    var _this=this;
+                    $.ajax({
+                        type:'POST',
+                        dataType:'json',
+                        url:'policy/select_all',
+                        success:function (res) {
+                            _this.list=res.data;
+                        },
+                        error:function () {
+                        layui.msg("政策数据获取失败");
+                        }
+                    })
+                }
+            },
+            created: function () {
+                this.get_policy();
+            }
+        });
+
+    });
 
     /**************************************/
     var maps = [];
