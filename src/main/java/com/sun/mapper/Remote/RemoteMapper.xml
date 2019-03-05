@@ -14,10 +14,10 @@
     </select>
 
     <select id="list" parameterType="map" resultType="hashmap">
-        SELECT A.uid,A.date,A.datatype,A.imagebase64,A.max,A.min FROM tb_remote A
+        SELECT A.uid,A.date,A.datatype,A.max,A.min FROM tb_remote A
         <trim prefix="WHERE" suffixOverrides="AND|OR">
             <if test="uid!=null">
-                A.uid=#{uid} AND
+                A.uid=#{uid}::uuid AND
             </if>
             A.active=true
         </trim>
@@ -38,27 +38,28 @@
     <update id="update" parameterType="map">
         <if test="uid!=null">
             UPDATE tb_remote
-            SET
+            <trim prefix="set" suffixOverrides=",">
             <if test="date!=null">
-                date=#{date}
+                date=#{date}::date,
             </if>
             <if test="datatype!=null and datatype!=''">
-                datatype=#{datatype}
+                datatype=#{datatype},
             </if>
             <if test="imagebase64!=null and imagebase64!=''">
-                imagebase64=#{imagebase64}
+                imagebase64=#{imagebase64},
             </if>
             <if test="max!=null">
-                max=#{max}
+                max=#{max}::numeric,
             </if>
             <if test="min!=null">
-                min=#{min}
+                min=#{min}::numeric,
             </if>
             <if test="active!=null">
-                active=#{active}
+                active=#{active}::boolean
             </if>
+            </trim>
             <where>
-                uid=#{uid}
+                uid=#{uid}::uuid
             </where>
         </if>
     </update>
@@ -68,14 +69,14 @@
         SET
         active=false
         <where>
-            uid=#{uid}
+            uid=#{uid}::uuid
         </where>
     </update>
 
     <insert id="picture_insert" parameterType="map">
         <if test="uid!=null and imagebase64!=null">
             INSERT INTO tb_remote(uid,imagebase64)
-            VALUE (#{uid},#{imagebase64})
+            VALUES (#{uid}::uuid,#{imagebase64})
         </if>
     </insert>
 </mapper>
