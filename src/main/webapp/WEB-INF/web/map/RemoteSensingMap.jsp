@@ -99,48 +99,50 @@
     </style>
 </head>
 <body>
-<div>
+
+<div style="flex-grow: 1;width: 100%;height: 100%">
     <div id="map"></div>
-    <%@include file="/template/ResourcesMap.jsp" %>
-    <%@include file="/template/CommonMap.jsp" %>
-    <div id="panel" style="flex-grow: 1;overflow-y: auto;">
-        <div>
-            <label class=" control-label" style="margin-top: 5px">数据类型:</label>
-            <select id="select" class="form-control" v-on:change="select_change" v-model="selected">
-                <option v-for="option in select" v-bind:value="option">{{option}}</option>
-            </select>
-        </div>
-        <div style="text-align: center;margin-top: 5px">
-            <button class="layui-btn " v-bind:class="play" v-on:click="play_image">数据播放</button>
-        </div>
-        <div id="li_list">
-            <ul class="layui-timeline" style="margin-left:10%;margin-top: 10px">
-                <li class="layui-timeline-item " v-for="li in list" @click="click(li)" style="cursor:pointer;">
-                    <i class="layui-icon layui-timeline-axis li_change"></i>
-                    <div class="layui-timeline-content layui-text" style="color: white">
-                        <h3 class="layui-timeline-title" style="color: white">{{li.date}}</h3>
-                        <p>{{li.datatype}}</p>
-                        <ul>
-                            <li disabled="">{{li.max}}</li>
-                            <li>{{li.min}}</li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div id="legend_div" v-bind:class="{show:legend.show}">
-            <div id="legend">
-                <div style="background-color: #1d1d1d; width: 100%">
-                    <font style="line-height: 20px; color: white; text-align: center; width: 100%">{{legend.date}}</font>
+</div>
+<%@include file="/template/ResourcesMap.jsp" %>
+<%@include file="/template/CommonMap.jsp" %>
+<div id="panel" style="flex-grow: 1;overflow-y: auto;">
+    <div>
+        <label class=" control-label" style="margin-top: 5px">数据类型:</label>
+        <select id="select" class="form-control" v-on:change="select_change" v-model="selected">
+            <option v-for="option in select" v-bind:value="option">{{option}}</option>
+        </select>
+    </div>
+    <div style="text-align: center;margin-top: 5px">
+        <button class="layui-btn " v-bind:class="play" v-on:click="play_image">数据播放</button>
+    </div>
+    <div id="li_list">
+        <ul class="layui-timeline" style="margin-left:10%;margin-top: 10px">
+            <li class="layui-timeline-item " v-for="li in list" @click="click(li)" style="cursor:pointer;">
+                <i class="layui-icon layui-timeline-axis li_change"></i>
+                <div class="layui-timeline-content layui-text" style="color: white">
+                    <h3 class="layui-timeline-title" style="color: white">{{li.date}}</h3>
+                    <p>{{li.datatype}}</p>
+                    <ul>
+                        <li disabled="">{{li.max}}</li>
+                        <li>{{li.min}}</li>
+                    </ul>
                 </div>
-                <font>ndvi指数</font>
-                <font>{{legend.maxData}}</font>
-                <img v-bind:src="legend.img">
-                <font>{{legend.minData}}</font>
+            </li>
+        </ul>
+    </div>
+    <div id="legend_div" v-bind:class="{show:legend.show}">
+        <div id="legend">
+            <div style="background-color: #1d1d1d; width: 100%">
+                <font style="line-height: 20px; color: white; text-align: center; width: 100%">{{legend.date}}</font>
             </div>
+            <font>ndvi指数</font>
+            <font>{{legend.maxData}}</font>
+            <img v-bind:src="legend.img">
+            <font>{{legend.minData}}</font>
         </div>
     </div>
 </div>
+
 <script>
     layui.use('layer', function () {
     });
@@ -166,7 +168,7 @@
                 var _this = this;
                 var datatype = this.selected;
                 var load = layer.load();
-                var index=layer.open({type:3});
+                var index = layer.open({type: 3});
                 $.when($.ajax({
                     type: 'POST',
                     dataType: 'json',

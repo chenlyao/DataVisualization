@@ -47,10 +47,12 @@
     </style>
 </head>
 <body>
-<div>
+
+<div style="flex-grow: 1;width: 100%;height: 100%">
     <div id="map"></div>
-    <%@include file="/template/ResourcesMap.jsp" %>
-    <%@include file="/template/CommonMap.jsp"%>
+</div>
+<%@include file="/template/ResourcesMap.jsp" %>
+<%@include file="/template/CommonMap.jsp"%>
     <div class="btn-group text-center" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalTwo">测土配方卡</button>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalOne">元素地图计算</button>
@@ -186,7 +188,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-</div>
+
 <%--query功能--%>
 <link rel="stylesheet" type="text/css"
       href="http://arcgisjs.aheagle.com:1080/arcgis_js_api/library/3.17/3.17/esri/css/esri.css"/>

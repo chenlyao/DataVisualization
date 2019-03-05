@@ -48,28 +48,31 @@
     </style>
 </head>
 <body>
-<div>
+
+<div style="flex-grow: 1;width: 100%;height: 100%">
     <div id="map"></div>
-    <%@include file="/template/ResourcesMap.jsp" %>
-    <%@include file="/template/CommonMap.jsp"%>
-    <div id="main" class="btn-group" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
-        <div class="btn-group" role="group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                土壤元素
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-                <li @click="clickButton(PH)"><a href="#">PH</a></li>
-                <li @click="clickButton(Organic)"><a href="#">有机质</a></li>
-                <li @click="clickButton(N)"><a href="#">N</a></li>
-                <li @click="clickButton(P)"><a href="#">P</a></li>
-                <li @click="clickButton(K)"><a href="#">K</a></li>
-            </ul>
-        </div>
-        <button type="button" class="btn btn-default" @click="clear">清空</button>
-    </div>
 </div>
+
+<%@include file="/template/ResourcesMap.jsp" %>
+<%@include file="/template/CommonMap.jsp" %>
+<div id="main" class="btn-group" role="group" style="flex-grow: 1;position: fixed;top:3%;right: 18%; z-index: 10">
+    <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            土壤元素
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li @click="clickButton(PH)"><a href="#">PH</a></li>
+            <li @click="clickButton(Organic)"><a href="#">有机质</a></li>
+            <li @click="clickButton(N)"><a href="#">N</a></li>
+            <li @click="clickButton(P)"><a href="#">P</a></li>
+            <li @click="clickButton(K)"><a href="#">K</a></li>
+        </ul>
+    </div>
+    <button type="button" class="btn btn-default" @click="clear">清空</button>
+</div>
+
 <script>
     var maps = [];
 
@@ -81,7 +84,7 @@
         maps.length = 0;
     }
 
-    function getmap(url,x) {
+    function getmap(url, x) {
         ClearMaps();
         maps.push(new L.esri.dynamicMapLayer({
             url: url,
@@ -121,7 +124,7 @@
         },
         methods: {
             clickButton: function (data) {
-                getmap(data.url,data.coverage);
+                getmap(data.url, data.coverage);
                 GetLegend(data.url, data.name, data.coverage);
             },
             clear: function () {
