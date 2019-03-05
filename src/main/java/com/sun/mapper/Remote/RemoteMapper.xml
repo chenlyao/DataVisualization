@@ -21,6 +21,7 @@
             </if>
             A.active=true
         </trim>
+        order by A.date ASC
         <if test="limit!=null">
             <if test="page!=null">
                 OFFSET #{page}::bigint
@@ -79,4 +80,8 @@
             VALUES (#{uid}::uuid,#{imagebase64})
         </if>
     </insert>
+
+    <select id="get_list_length" resultType="int">
+        SELECT COUNT(A.uid) FROM tb_remote A
+    </select>
 </mapper>

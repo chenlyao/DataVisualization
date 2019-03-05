@@ -15,4 +15,6 @@ public interface RemoteMapper {
     int delete(Map map);
 
     int picture_insert(Map map);
+
+    int get_list_length();
 }

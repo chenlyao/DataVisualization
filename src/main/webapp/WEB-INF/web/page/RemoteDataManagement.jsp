@@ -104,6 +104,10 @@
     </div>
 </script>
 <script>
+
+    var list_length;//数据长度
+
+
     var modal = new Vue({
         el: '#myModal',
         data: {
@@ -112,6 +116,20 @@
             selected: '',
             select: ['NDVI', 'GNDVI', '生物量', '叶面积 ', '吸氮量', '产量'],
             show: false
+        },
+        methods: {
+            get_list_length: function () {
+                $.ajax({
+                    type: 'POST',
+                    url: 'remote/get_list_length.in',
+                    success: function (res) {
+                        list_length = res;
+                    }
+                })
+            }
+        },
+        created: function () {
+            this.get_list_length();
         }
     });
     layui.use(['table', 'layer', 'form', 'laydate', 'upload'], function () {
@@ -138,11 +156,10 @@
                 statusCode: "success" //重新规定成功的状态码为 200，table 组件默认为 0
             },
             parseData: function (res) {//将原始数据解析成table组件所规定的数据
-                console.log(res);
                 return {
                     "code": res.type,//解析接口状态
                     "msg": '',//解析提示文本
-                    "count": 10,//解析数据长度
+                    "count": list_length,//解析数据长度
                     "data": res.data//解析数据列表
                 }
             }
@@ -167,7 +184,6 @@
                             imagebase64: result
                         },
                         success: function (res) {
-                            console.log(res);
                             $('#remote_picture').attr('src', result);
                             $('input[name=uid]').val(res);
                         },
@@ -184,7 +200,6 @@
             elem: '#date'
         });
         table.on('tool(test)', function (obj) {
-            console.log(obj.data);
             modal.show = true;
             if (obj.event == 'edit') {
                 form.val('form', obj.data);
@@ -206,7 +221,7 @@
                             type: "POST",
                             url: 'remote/delete.in',
                             data: {
-                                uid:obj.data.uid
+                                uid: obj.data.uid
                             },
                             success: function (res) {
                                 layer.close(index);
@@ -239,7 +254,6 @@
             }
         });
         form.on('submit(formDemo)', function (data) {
-            console.log(data);
             if (modal.submit == '确认新增') {
                 //等待界面
                 var index = layer.load();
@@ -262,7 +276,6 @@
                 })
             }
             if (modal.submit == '确认修改') {
-                console.log(data.field);
                 $.when($.ajax({
                     type: 'POST',
                     url: 'remote/update.in',

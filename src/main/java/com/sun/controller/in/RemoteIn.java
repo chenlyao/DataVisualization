@@ -87,5 +87,9 @@ public class RemoteIn {
         return gson.toJson(resultModel);
     }
 
+    @RequestMapping("/get_list_length.in")
+    public String get_list_length() {
+        return gson.toJson(remoteMapper.get_list_length());
+    }
 
 }
