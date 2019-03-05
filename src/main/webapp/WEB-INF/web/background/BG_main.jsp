@@ -56,8 +56,6 @@
                     <dd v-for="(m,j) in ms.menu"  @click="clickMenu(m,i,j)"><a href="javascript:void(0)">{{m.name}}</a></dd>
                 </dl>
             </li>
-                <li class="layui-nav-item"><a href="#">用户管理</a></li>
-                <li class="layui-nav-item"><a href="#">遥感数据管理</a></li>
             </ul>
         </div>
     </div>
@@ -106,6 +104,15 @@
                         {
                             name:'村级数据管理',
                             url:'VillageDataManagement.net'
+                        }
+                    ]
+                },
+                {
+                    name:'遥感数据管理',
+                    menu:[
+                        {
+                            name:'遥感数据管理',
+                            url:'RemoteDataManagement.net'
                         }
                     ]
                 }

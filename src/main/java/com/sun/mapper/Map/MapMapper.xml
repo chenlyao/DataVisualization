@@ -67,25 +67,25 @@
             UPDATE tb_village
             <set>
                 <if test="cjqydm!=null and cjqydm!=''">
-                   cjqydm=#{cjqydm},
+                    cjqydm=#{cjqydm},
                 </if>
                 <if test="name!=null and name!=''">
-                   name=#{name},
+                    name=#{name},
                 </if>
                 <if test="ph!=null and ph!=''">
                     ph=#{ph}::numeric,
                 </if>
                 <if test="organic!=null and organic!=''">
-                   organic=#{organic}::numeric,
+                    organic=#{organic}::numeric,
                 </if>
                 <if test="n!=null and n!=''">
-                   n=#{n}::numeric,
+                    n=#{n}::numeric,
                 </if>
                 <if test="p!=null and n!=''">
-                   p=#{p}::numeric,
+                    p=#{p}::numeric,
                 </if>
                 <if test="k!=null and k!=''">
-                   k=#{k}::numeric
+                    k=#{k}::numeric
                 </if>
             </set>
             WHERE uid=#{uid}::uuid

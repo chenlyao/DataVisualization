@@ -2,5 +2,80 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--与接口的位置对应-->
 <mapper namespace="com.sun.mapper.Remote.RemoteMapper">
+    <select id="select_all" parameterType="map" resultType="hashmap">
+        SELECT A.* FROM tb_remote A
+        <where>
+            <if test="datatype!=null">
+                A.datatype=#{datatype} AND
+            </if>
+            A.active=true
+        </where>
+        order by A.date ASC
+    </select>
 
+    <select id="list" parameterType="map" resultType="hashmap">
+        SELECT A.uid,A.date,A.datatype,A.imagebase64,A.max,A.min FROM tb_remote A
+        <trim prefix="WHERE" suffixOverrides="AND|OR">
+            <if test="uid!=null">
+                A.uid=#{uid} AND
+            </if>
+            A.active=true
+        </trim>
+        <if test="limit!=null">
+            <if test="page!=null">
+                OFFSET #{page}::bigint
+            </if>
+            LIMIT #{limit}::bigint
+        </if>
+    </select>
+
+    <insert id="insert" parameterType="map">
+        INSERT INTO tb_remote(date, datatype, imagebase64, max, min, active)
+        values
+            (#{date}, #{datatype}, #{imagebase64}, #{max}, #{min}, #{active})
+    </insert>
+
+    <update id="update" parameterType="map">
+        <if test="uid!=null">
+            UPDATE tb_remote
+            SET
+            <if test="date!=null">
+                date=#{date}
+            </if>
+            <if test="datatype!=null and datatype!=''">
+                datatype=#{datatype}
+            </if>
+            <if test="imagebase64!=null and imagebase64!=''">
+                imagebase64=#{imagebase64}
+            </if>
+            <if test="max!=null">
+                max=#{max}
+            </if>
+            <if test="min!=null">
+                min=#{min}
+            </if>
+            <if test="active!=null">
+                active=#{active}
+            </if>
+            <where>
+                uid=#{uid}
+            </where>
+        </if>
+    </update>
+
+    <update id="delete" parameterType="map">
+        UPDATE tb_remote
+        SET
+        active=false
+        <where>
+            uid=#{uid}
+        </where>
+    </update>
+
+    <insert id="picture_insert" parameterType="map">
+        <if test="uid!=null and imagebase64!=null">
+            INSERT INTO tb_remote(uid,imagebase64)
+            VALUE (#{uid},#{imagebase64})
+        </if>
+    </insert>
 </mapper>
