@@ -21,17 +21,15 @@
             display: flex;
             justify-content: flex-start;
             flex-direction: column;
-            overflow-y: hidden;
         }
 
         #panel {
             width: 40%;
-            height: 100%;
+            height: auto;
         }
     </style>
 </head>
 <body>
-
 <div id="panel" class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">

@@ -39,6 +39,14 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">天气预览 <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li data-toggle="modal" data-target="#weather"><a>天气预报</a></li>
+                            <li data-toggle="modal" data-target="#weather_seven"><a>七天天气</a></li>
+                        </ul>
+                    </li>
                     <li :class="{'active':首页.active}" @click="clickButton(首页)"><a href="#">首页</a></li>
                     <li :class="{'active':土壤养分.active}" @click="clickButton(土壤养分)"><a href="#">土壤养分</a></li>
                     <li :class="{'active':测土配方.active}" @click="clickButton(测土配方)"><a href="#">测土配方</a></li>
@@ -69,6 +77,57 @@
     <div class="container-fluid"
          style=" flex-grow: 1;position: fixed; top: 5%;height: 91%;width: 100%;padding: 0;margin: 0">
         <iframe id="iframe" src="BasicMap.net" name="content" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    <%--天气预报--%>
+    <div class="modal fade" id="weather" tabindex="-1" role="dialog" aria-labelledby="ModalTwoLabel"
+         aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        天气预报
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div style="flex-grow: 1;height:80px;width: 40%;">
+                        <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=2&num=4" width="550"
+                                height="70" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"
+                                style="border:solid 1px #7ec8ea"></iframe>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    <%--七天天气预报--%>
+    <div class="modal fade  bs-example-modal-lg" id="weather_seven" tabindex="-1" role="dialog" aria-labelledby="ModalTwoLabel"
+         aria-hidden="true" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog  modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title">
+                        天气预报
+                    </h4>
+                </div>
+                <div class="modal-body">
+                        <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=57" width="650"
+                                height="427" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
     </div>
     <%--底部--%>
     <nav class="navbar navbar-inverse navbar-fixed-bottom" style="min-height: 40px">

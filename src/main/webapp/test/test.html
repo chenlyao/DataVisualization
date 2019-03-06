@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+</head>
+<body>
+
+</body>
+<script>
+    TianDiTu();
+    function TianDiTu() {
+        var x = 117.02323;
+        var y = 37.71849;
+        console.log(x);
+        console.log(y);
+        $.ajax({
+            type: 'POST',
+            url: "http://api.tianditu.gov.cn/geocoder?postStr={'lon':"+x+",'lat':"+y+",'ver':1}&type=geocode&tk=daafafd5b7bb42922f10e3d1c06df824",
+            success: function(data) {
+              console.log(data);
+                alldata.location = data.result.formatted_address;
+            }
+        });
+    }
+</script>
+</html>
