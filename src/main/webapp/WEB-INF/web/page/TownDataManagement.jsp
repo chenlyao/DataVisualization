@@ -31,29 +31,53 @@
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
+
+
+    <form id="add_form" class="layui-form" lay-filter="add_filter" style="display: none;padding: 15px">
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 120px;">乡镇名称</label>
+            <div class="layui-input-block" style="margin-left: 120px">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入乡镇名称" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 120px;">类型</label>
+            <div class="layui-input-block" style="margin-left: 120px">
+                <input type="text" name="type" required lay-verify="required" placeholder="请输入类型" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block" style="margin-left: 120px">
+                <button class="layui-btn" lay-submit lay-filter="add_formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
 </div>
 <script>
-    layui.use(['table','layer','form'],function () {
-        var form=layui.form;
-        var layer=layui.layer;
-        var table=layui.table;
+    layui.use(['table', 'layer', 'form'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var table = layui.table;
 
         var list_length;
-        var control=new Vue({
-            el:'#table',
-            data:{},
-            methods:{
-                get_list_length:function () {
+        var control = new Vue({
+            el: '#table',
+            data: {},
+            methods: {
+                get_list_length: function () {
                     $.ajax({
-                        type:"POST",
-                        url:'town/get_list_length.in',
-                        success:function (res) {
-                            list_length=res;
+                        type: "POST",
+                        url: 'town/get_list_length.in',
+                        success: function (res) {
+                            list_length = res;
                         }
                     })
                 }
             },
-            created:function () {
+            created: function () {
                 this.get_list_length();
             }
         });
@@ -89,13 +113,50 @@
                 statusCode: "success" //重新规定成功的状态码为 200，table 组件默认为 0
             }
             , parseData: function (res) { //将原始数据解析成 table 组件所规定的数据
-                console.log(res);
                 return {
                     "code": res.type, //解析接口状态
                     "msg": '', //解析提示文本
                     "count": list_length, //解析数据长度
                     "data": res.data //解析数据列表
                 };
+            }
+        });
+
+        //按钮控制
+        table.on('toolbar(test)', function (obj) {
+            if (obj.event == 'add') {
+                //清空表单
+                form.val('add_filter', {
+                    name: '',
+                    type: ''
+                });
+                layer.open({
+                    title: '新增数据',
+                    type: 1,
+                    resize: false,
+                    area: ['800px', '300px'],
+                    content: $('#add_form')
+                })
+            }
+
+        });
+        //监听行工具事件
+        table.on('tool(test)', function (obj) {
+            console.log(obj.data);
+            if (obj.event === 'del') {
+                layer.confirm('真的删除行么？', function (index) {
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if (obj.event === 'edit') {
+                form.val('add_filter', obj.data);
+                layer.open({
+                    title: '修改数据',
+                    type: 1,
+                    resize: false,
+                    area: ['800px', '300px'],
+                    content: $('#add_form')
+                })
             }
         });
     })
