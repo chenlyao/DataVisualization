@@ -53,6 +53,9 @@
             <if test="name!=null">
                 A.name LIKE CONCAT('%',#{name},'%') AND
             </if>
+            <if test="uid!=null">
+                A.uid =#{uid}::uuid
+            </if>
         </trim>
         OFFSET #{page}::bigint
         LIMIT #{limit}::bigint

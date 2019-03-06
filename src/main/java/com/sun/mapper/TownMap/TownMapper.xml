@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<!--与接口的位置对应-->
+<mapper namespace="com.sun.mapper.TownMap.TownMapper">
+    <select id="select_all" parameterType="map" resultType="hashmap">
+        SELECT A.uid,A.name,A.organization,A.type
+        FROM tb_towns A
+        <trim prefix="WHERE" suffixOverrides="AND|OR">
+            <if test="name!=null">
+                A.name LIKE CONCAT('%',#{name},'%') AND
+            </if>
+            <if test="uid!=null">
+                A.uid =#{uid}::uuid
+            </if>
+        </trim>
+        <if test="limit!=null">
+            <if test="page!=null">
+                OFFSET #{page}::bigint
+            </if>
+            LIMIT #{limit}::bigint
+        </if>
+    </select>
+    <update id="update" parameterType="map">
+        <if test="uid!=null">
+            UPDATE tb_towns
+            <trim prefix="set" suffixOverrides=",">
+                <if test="name!=null">
+                    name=#{name},
+                </if>
+                <if test="border!=null">
+                    border=#{border},
+                </if>
+                <if test="organization!=null">
+                    organization=#{organization},
+                </if>
+                <if test="type!=null">
+                    type=#{type}
+                </if>
+            </trim>
+            <where>
+                uid=#{uid}::uuid
+            </where>
+        </if>
+    </update>
+</mapper>
