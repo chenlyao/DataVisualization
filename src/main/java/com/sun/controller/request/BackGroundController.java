@@ -45,4 +45,6 @@ public class BackGroundController {
     @RequestMapping("/RemoteDataManagement.net")
     public String RemoteDataManagement(){return "page/RemoteDataManagement";}
 
+    @RequestMapping("/TownDataManagement.net")
+    public String TownDataManagement(){return "page/TownDataManagement";}
 }

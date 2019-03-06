@@ -19,7 +19,7 @@ public class TownIn {
     @Autowired
     private Gson gson;
 
-    @RequestMapping("select.in")
+    @RequestMapping("/select.in")
     public String select_all(@RequestParam Map map) {
         ResultModel resultModel = new ResultModel();
         List<Map> a = townMapper.select_all(map);
@@ -29,5 +29,10 @@ public class TownIn {
             resultModel.type = "error";
         }
         return gson.toJson(resultModel);
+    }
+
+    @RequestMapping("/get_list_length.in")
+    public String get_list_length(){
+        return gson.toJson(townMapper.get_list_length());
     }
 }

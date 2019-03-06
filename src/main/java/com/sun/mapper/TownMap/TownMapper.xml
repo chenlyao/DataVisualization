@@ -42,4 +42,8 @@
             </where>
         </if>
     </update>
+
+    <select id="get_list_length" resultType="int">
+        SELECT COUNT(A.uid) FROM tb_towns A
+    </select>
 </mapper>

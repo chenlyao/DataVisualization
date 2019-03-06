@@ -102,7 +102,7 @@
     <script type="text/html" id="barDemo">
         <%--<a class="layui-btn layui-btn-xs layui-btn-normal " lay-event="check">查看</a>--%>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        <%--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>--%>
     </script>
 </div>
 <script>
@@ -113,12 +113,27 @@
         var layer = layui.layer;
         var table = layui.table;
 
+        var village_length;
         var page = new Vue({
             el: '#table',
             data: {
                 title: '',
                 input: {},
                 submit: ''
+            },
+            methods: {
+                get_village_length: function () {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'village/get_village_length.in',
+                        success: function (res) {
+                            village_length = res;
+                        }
+                    })
+                }
+            },
+            created: function () {
+                this.get_village_length();
             }
         });
 
@@ -160,7 +175,7 @@
                 return {
                     "code": res.type, //解析接口状态
                     "msg": '', //解析提示文本
-                    "count": 1071, //解析数据长度
+                    "count": village_length, //解析数据长度
                     "data": res.data //解析数据列表
                 };
             }

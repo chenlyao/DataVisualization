@@ -101,4 +101,7 @@
         </if>
     </insert>
 
+    <select id="get_village_length" resultType="int">
+        SELECT COUNT(A.uid) FROM tb_village A
+    </select>
 </mapper>

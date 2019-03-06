@@ -36,4 +36,7 @@ public interface MapMapper {
 
     //添加数据
     int village_insert(Map map);
+
+    //获取村级数据的长度
+    int get_village_length();
 }

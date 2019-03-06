@@ -7,4 +7,6 @@ public interface TownMapper {
     List<Map> select_all(Map map);
 
     int update(Map map);
+
+    int get_list_length();
 }

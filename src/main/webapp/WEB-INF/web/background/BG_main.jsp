@@ -102,8 +102,8 @@
                             url:'VillageDataManagement.net'
                         },
                         {
-                            name:'村级数据管理',
-                            url:'VillageDataManagement.net'
+                            name:'乡镇数据管理',
+                            url:'TownDataManagement.net'
                         }
                     ]
                 },
