@@ -3,10 +3,12 @@
 <!--与接口的位置对应-->
 <mapper namespace="com.sun.mapper.User.UserMapper">
     <select id="IsLogin" parameterType="map" resultType="hashmap">
-        SELECT A.*
-        FROM "user" A
-        WHERE A.username = #{username}
-          AND A.password = #{password}
+        <if test="username!=null and username!='' and password!=null and password!=''">
+            SELECT A.*
+            FROM "user" A
+            WHERE A.username = #{username}
+            AND A.password = #{password} AND A.active=TRUE
+        </if>
     </select>
     <insert id="Register" parameterType="map">
         <if test="username!=null and username!=''&amp;&amp;password!=null and password!=''&amp;&amp;name!=null and name!=''&amp;&amp;email!=null and email!=''&amp;&amp;sex!=null and sex!=''">
@@ -45,18 +47,18 @@
                 <if test="sex!=null and sex!=''">
                     sex=#{sex},
                 </if>
-              <if test="state!=null and state!=''">
-                  state=#{state}::boolean,
-              </if>
-              <if test="birthday!=null and birthday!=''">
-                  birthday=#{birthday},
-              </if>
-              <if test="role!=null and role!=''">
-                  role=#{role}::uuid,
-              </if>
-              <if test="remark!=null and remark!=''">
-                  remark=#{remark}::text
-              </if>
+                <if test="state!=null and state!=''">
+                    active=#{active}::boolean,
+                </if>
+                <if test="birthday!=null and birthday!=''">
+                    birthday=#{birthday},
+                </if>
+                <if test="role!=null and role!=''">
+                    role=#{role}::uuid,
+                </if>
+                <if test="remark!=null and remark!=''">
+                    remark=#{remark}::text
+                </if>
             </trim>
         </if>
     </update>
