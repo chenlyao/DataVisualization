@@ -106,7 +106,8 @@
         </div><!-- /.modal -->
     </div>
     <%--七天天气预报--%>
-    <div class="modal fade  bs-example-modal-lg" id="weather_seven" tabindex="-1" role="dialog" aria-labelledby="ModalTwoLabel"
+    <div class="modal fade  bs-example-modal-lg" id="weather_seven" tabindex="-1" role="dialog"
+         aria-labelledby="ModalTwoLabel"
          aria-hidden="true" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog  modal-lg">
             <div class="modal-content">
@@ -119,8 +120,8 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                        <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=57" width="650"
-                                height="427" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+                    <iframe name="weather_inc" src="http://i.tianqi.com/index.php?c=code&id=57" width="650"
+                            height="427" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭
@@ -137,13 +138,9 @@
 </div>
 
 <script>
-    var data = '<%=session.getAttribute("data")%>';
+    <%--var data = '<%=session.getAttribute("data")%>';--%>//获取session中的对象
     $(function () {
-        if (data == null) {
-            alert("请先登录！");
-            window.location.href = "Exit.in";
-        }
-        $('#bg').attr("href", "BackGround.net?username=" + data.data.username);
+
     });
 
     function GotoUserManagement() {

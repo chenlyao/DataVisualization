@@ -12,7 +12,7 @@ public class PageController {
      *
      * @return
      */
-    @RequestMapping("/")
+    @RequestMapping("/Login")
     public String Login() {
         return "Login";
     }
