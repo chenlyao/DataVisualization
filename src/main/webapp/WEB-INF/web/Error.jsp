@@ -37,10 +37,7 @@
 
         },
         created:function () {
-            var a="${message}";
-            if(a!=null){
-                this.title=a;
-            }
+
         }
     })
 </script>
