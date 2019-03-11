@@ -32,6 +32,15 @@
         el: "#index",
         data: {
             title: "页面被黑洞吸走了！！！"
+        },
+        methods:{
+
+        },
+        created:function () {
+            var a="${message}";
+            if(a!=null){
+                this.title=a;
+            }
         }
     })
 </script>

@@ -8,7 +8,7 @@
   </welcome-file-list>
   <error-page>
     <error-code>404</error-code>
-    <location>/template/Error.jsp</location>
+    <location>/Error.net</location>
   </error-page>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

@@ -78,6 +78,9 @@ public class PageController {
     }
 
 
-
+    @RequestMapping("/Error.net")
+    public String Error(){
+        return "Error";
+    }
 
 }

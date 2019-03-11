@@ -2,6 +2,7 @@ package com.sun.controller.request;
 
 import com.google.gson.Gson;
 import com.sun.mapper.User.UserMapper;
+import com.sun.pojo.CustomException;
 import com.sun.pojo.ResultModel;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +54,12 @@ public class UserController {
      */
     @RequestMapping("/isLogin.in")
     @ResponseBody
-    public String IsLogin(@Param("username") String username, @Param("password") String password, HttpSession session) {
+    public String IsLogin(@Param("username") String username, @Param("password") String password, HttpSession session) throws Exception{
         ResultModel resultModel = new ResultModel();
         Map map = userMapper.IsLogin(username, password);
         if (map == null) {
             resultModel.type = "error";
+            //throw new CustomException("用户或密码错误！");
         } else {
             session.setAttribute("username", username);
             resultModel.data = map;
