@@ -62,7 +62,7 @@ public class UserController {
             session.setAttribute("username", username);
             resultModel.data = map;
         }
-//        session.setAttribute("data", gson.toJson(resultModel));
+        session.setAttribute("data", gson.toJson(resultModel));
         return gson.toJson(resultModel);
     }
 

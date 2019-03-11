@@ -138,9 +138,10 @@
 </div>
 
 <script>
-    <%--var data = '<%=session.getAttribute("data")%>';--%>//获取session中的对象
+    var data = '<%=session.getAttribute("data")%>';
+    //获取session中的对象
     $(function () {
-
+        $('#bg').attr("href", "BackGround.net?username=" + data.data.username);
     });
 
     function GotoUserManagement() {
