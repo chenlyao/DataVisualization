@@ -59,7 +59,6 @@ public class findMedianSortedArrays {
                 } else {
                     minRight = Math.min(B[j], A[i]);
                 }
-
                 return (maxLeft + minRight) / 2.0;
             }
         }
