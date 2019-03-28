@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="jquery-3.3.1.min.js"></script>
 </head>
 <body>
 
@@ -18,9 +18,10 @@
         $.ajax({
             type: 'POST',
             url: "http://api.tianditu.gov.cn/geocoder?postStr={'lon':"+x+",'lat':"+y+",'ver':1}&type=geocode&tk=daafafd5b7bb42922f10e3d1c06df824",
+            dataType: 'json',
             success: function(data) {
               console.log(data);
-                alldata.location = data.result.formatted_address;
+                //alldata.location = data.result.formatted_address;
             }
         });
     }
